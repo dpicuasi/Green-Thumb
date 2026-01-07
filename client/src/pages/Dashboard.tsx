@@ -59,7 +59,7 @@ export default function Dashboard() {
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-display font-bold">{t("dashboard.needsAttention")}</h2>
           <Link href="/">
-            <Button variant="link" className="text-primary">{t("dashboard.viewAll")} <ArrowRight className="w-4 h-4 ml-1" /></Button>
+            <Button variant="ghost" className="text-primary">{t("dashboard.viewAll")} <ArrowRight className="w-4 h-4 ml-1" /></Button>
           </Link>
         </div>
 
