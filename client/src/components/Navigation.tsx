@@ -1,0 +1,106 @@
+import { Link, useLocation } from "wouter";
+import { useAuth } from "@/hooks/use-auth";
+import { Sprout, LayoutDashboard, Calendar, Sparkles, LogOut, Menu, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+
+export function Navigation() {
+  const [location] = useLocation();
+  const { user, logout } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const links = [
+    { href: "/", label: "Garden", icon: Sprout },
+    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/ai-advisor", label: "AI Advisor", icon: Sparkles },
+    { href: "/subscription", label: "Premium", icon: User },
+  ];
+
+  const NavContent = () => (
+    <div className="flex flex-col h-full">
+      <div className="p-6 border-b border-border/50">
+        <h1 className="text-2xl font-display font-bold text-primary flex items-center gap-2">
+          <Sprout className="w-8 h-8 fill-primary/20" />
+          Plant Pal
+        </h1>
+        {user && (
+          <div className="mt-4 flex items-center gap-3 text-sm text-muted-foreground">
+            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+              {user.firstName?.[0] || user.email?.[0] || "U"}
+            </div>
+            <div className="flex flex-col">
+              <span className="font-medium text-foreground">{user.firstName || 'Gardener'}</span>
+              <span className="text-xs">{user.email}</span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <nav className="flex-1 p-4 space-y-2">
+        {links.map((link) => {
+          const Icon = link.icon;
+          const isActive = location === link.href;
+          return (
+            <Link key={link.href} href={link.href}>
+              <button
+                onClick={() => setIsOpen(false)}
+                className={cn(
+                  "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group",
+                  isActive 
+                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/20" 
+                    : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                )}
+              >
+                <Icon className={cn("w-5 h-5", isActive ? "stroke-[2.5px]" : "stroke-[2px]")} />
+                <span className="font-medium">{link.label}</span>
+              </button>
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className="p-4 border-t border-border/50">
+        <Button 
+          variant="ghost" 
+          className="w-full justify-start gap-3 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+          onClick={() => logout()}
+        >
+          <LogOut className="w-5 h-5" />
+          Log Out
+        </Button>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-background/80 backdrop-blur-md border-b z-50 px-4 flex items-center justify-between">
+        <h1 className="text-xl font-display font-bold text-primary flex items-center gap-2">
+          <Sprout className="w-6 h-6" />
+          Plant Pal
+        </h1>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Menu className="w-6 h-6" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="p-0 w-80">
+            <NavContent />
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      {/* Desktop Sidebar */}
+      <div className="hidden lg:block fixed top-0 left-0 bottom-0 w-64 bg-card border-r border-border/50 shadow-sm z-40">
+        <NavContent />
+      </div>
+
+      {/* Spacer for mobile header */}
+      <div className="h-16 lg:hidden" />
+    </>
+  );
+}
