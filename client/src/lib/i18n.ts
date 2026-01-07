@@ -25,7 +25,22 @@ const resources = {
       "chat.placeholder": "Ask about your plants...",
       "common.loading": "Loading...",
       "common.error": "An error occurred",
-      "auth.login": "Log In with Replit"
+      "nav.logout": "Log Out",
+      "dashboard.welcome": "Good Morning, {{name}}",
+      "dashboard.todayIs": "Today is {{date}}",
+      "dashboard.totalPlantsSub": "In your collection",
+      "dashboard.healthySub": "{{percent}}% of garden",
+      "dashboard.needsCareSub": "Requires attention",
+      "dashboard.viewAll": "View All Garden",
+      "dashboard.happyPlants": "All plants are happy!",
+      "dashboard.happyPlantsSub": "Great job keeping up with your garden.",
+      "dashboard.waterNow": "Water Now",
+      "plants.subtitle": "Manage and track your plant collection.",
+      "plants.search": "Search your plants...",
+      "plants.noneFound": "No plants found",
+      "plants.noneFoundSub": "Start your digital garden by adding your first plant.",
+      "chat.welcome": "Hello! I am your AI Plant Advisor. Ask me anything about plant care, diagnosing issues, or local growing tips.",
+      "chat.subtitle": "Your expert botanist in your pocket."
     }
   },
   es: {
@@ -50,7 +65,22 @@ const resources = {
       "chat.placeholder": "Pregunta sobre tus plantas...",
       "common.loading": "Cargando...",
       "common.error": "Ocurrió un error",
-      "auth.login": "Iniciar sesión con Replit"
+      "nav.logout": "Cerrar Sesión",
+      "dashboard.welcome": "¡Buenos días, {{name}}!",
+      "dashboard.todayIs": "Hoy es {{date}}",
+      "dashboard.totalPlantsSub": "En tu colección",
+      "dashboard.healthySub": "{{percent}}% del jardín",
+      "dashboard.needsCareSub": "Requiere atención",
+      "dashboard.viewAll": "Ver Todo el Jardín",
+      "dashboard.happyPlants": "¡Todas las plantas están felices!",
+      "dashboard.happyPlantsSub": "Excelente trabajo cuidando tu jardín.",
+      "dashboard.waterNow": "Regar Ahora",
+      "plants.subtitle": "Gestiona y sigue tu colección de plantas.",
+      "plants.search": "Busca tus plantas...",
+      "plants.noneFound": "No se encontraron plantas",
+      "plants.noneFoundSub": "Empieza tu jardín digital añadiendo tu primera planta.",
+      "chat.welcome": "¡Hola! Soy tu Asesor de Plantas IA. Pregúntame lo que quieras sobre el cuidado de plantas, diagnóstico de problemas o consejos de cultivo local.",
+      "chat.subtitle": "Tu experto botánico en el bolsillo."
     }
   }
 };

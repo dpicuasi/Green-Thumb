@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Send, Sparkles, User, Bot } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@shared/routes";
+import { useTranslation } from "react-i18next";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -13,8 +14,9 @@ interface Message {
 }
 
 export default function AIAdvisor() {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Hello! I am your AI Plant Advisor. Ask me anything about plant care, diagnosing issues, or local growing tips.' }
+    { role: 'assistant', content: t("chat.welcome", { defaultValue: 'Hello! I am your AI Plant Advisor. Ask me anything about plant care, diagnosing issues, or local growing tips.' }) }
   ]);
   const [input, setInput] = useState("");
   
@@ -48,9 +50,9 @@ export default function AIAdvisor() {
       <div className="mb-6 text-center">
         <h1 className="text-3xl font-display font-bold text-foreground flex items-center justify-center gap-2">
           <Sparkles className="w-6 h-6 text-primary" />
-          AI Plant Advisor
+          {t("chat.title")}
         </h1>
-        <p className="text-muted-foreground">Your expert botanist in your pocket.</p>
+        <p className="text-muted-foreground">{t("chat.subtitle", { defaultValue: "Your expert botanist in your pocket." })}</p>
       </div>
 
       <Card className="flex-1 flex flex-col overflow-hidden bg-white/50 backdrop-blur-sm border-border/50 shadow-sm">
@@ -97,7 +99,7 @@ export default function AIAdvisor() {
             <Input 
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about your plants..."
+              placeholder={t("chat.placeholder")}
               className="flex-1 rounded-xl bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all"
             />
             <Button type="submit" size="icon" disabled={isPending || !input.trim()} className="rounded-xl shrink-0">

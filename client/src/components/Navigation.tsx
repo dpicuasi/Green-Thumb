@@ -5,17 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 export function Navigation() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const links = [
-    { href: "/", label: "Garden", icon: Sprout },
-    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/ai-advisor", label: "AI Advisor", icon: Sparkles },
-    { href: "/subscription", label: "Premium", icon: User },
+    { href: "/", label: t("nav.myPlants"), icon: Sprout },
+    { href: "/dashboard", label: t("nav.dashboard"), icon: LayoutDashboard },
+    { href: "/ai-advisor", label: t("nav.chat"), icon: Sparkles },
+    { href: "/subscription", label: t("nav.subscription"), icon: User },
   ];
 
   const NavContent = () => (
@@ -23,7 +25,7 @@ export function Navigation() {
       <div className="p-6 border-b border-border/50">
         <h1 className="text-2xl font-display font-bold text-primary flex items-center gap-2">
           <Sprout className="w-8 h-8 fill-primary/20" />
-          Plant Pal
+          {t("app.name")}
         </h1>
         {user && (
           <div className="mt-4 flex items-center gap-3 text-sm text-muted-foreground">
@@ -68,7 +70,7 @@ export function Navigation() {
           onClick={() => logout()}
         >
           <LogOut className="w-5 h-5" />
-          Log Out
+          {t("nav.logout", { defaultValue: "Log Out" })}
         </Button>
       </div>
     </div>
@@ -80,7 +82,7 @@ export function Navigation() {
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-background/80 backdrop-blur-md border-b z-50 px-4 flex items-center justify-between">
         <h1 className="text-xl font-display font-bold text-primary flex items-center gap-2">
           <Sprout className="w-6 h-6" />
-          Plant Pal
+          {t("app.name")}
         </h1>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
