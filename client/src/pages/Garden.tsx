@@ -6,11 +6,13 @@ import { Input } from "@/components/ui/input";
 import { CreatePlantDialog } from "@/components/CreatePlantDialog";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "react-i18next";
 
 export default function Garden() {
   const { data: plants, isLoading } = usePlants();
   const [search, setSearch] = useState("");
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const { t } = useTranslation();
 
   const filteredPlants = plants?.filter(p => 
     p.name.toLowerCase().includes(search.toLowerCase()) || 
@@ -21,8 +23,8 @@ export default function Garden() {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground">My Garden</h1>
-          <p className="text-muted-foreground mt-2">Manage and track your plant collection.</p>
+          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground">{t("plants.title")}</h1>
+          <p className="text-muted-foreground mt-2">{t("plants.subtitle", { defaultValue: "Manage and track your plant collection." })}</p>
         </div>
         
         <Button 
@@ -30,7 +32,7 @@ export default function Garden() {
           className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 rounded-xl h-12 px-6"
         >
           <Plus className="w-5 h-5 mr-2" />
-          Add New Plant
+          {t("plants.add")}
         </Button>
       </div>
 
@@ -38,7 +40,7 @@ export default function Garden() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <Input 
-            placeholder="Search your plants..." 
+            placeholder={t("plants.search", { defaultValue: "Search your plants..." })} 
             className="pl-10 h-12 rounded-xl bg-white border-border/50 focus:border-primary focus:ring-primary/20"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -62,9 +64,9 @@ export default function Garden() {
           <div className="inline-flex justify-center items-center w-16 h-16 rounded-full bg-secondary mb-4">
             <Plus className="w-8 h-8 text-muted-foreground" />
           </div>
-          <h3 className="text-xl font-bold text-foreground">No plants found</h3>
-          <p className="text-muted-foreground mt-2 mb-6">Start your digital garden by adding your first plant.</p>
-          <Button onClick={() => setIsCreateOpen(true)} variant="outline">Add Plant</Button>
+          <h3 className="text-xl font-bold text-foreground">{t("plants.noneFound", { defaultValue: "No plants found" })}</h3>
+          <p className="text-muted-foreground mt-2 mb-6">{t("plants.noneFoundSub", { defaultValue: "Start your digital garden by adding your first plant." })}</p>
+          <Button onClick={() => setIsCreateOpen(true)} variant="outline">{t("plants.add")}</Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

@@ -6,10 +6,12 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
   const { user } = useAuth();
   const { data: plants, isLoading } = usePlants();
+  const { t } = useTranslation();
 
   const needsAttention = plants?.filter(p => 
     (p.nextWatering && new Date(p.nextWatering) <= new Date()) || 
@@ -23,31 +25,31 @@ export default function Dashboard() {
     <div className="space-y-8">
       <div className="mb-8">
         <h1 className="text-4xl font-display font-bold text-foreground">
-          Good Morning, {user?.firstName || "Gardener"}
+          {t("dashboard.welcome", { name: user?.firstName || "Gardener", defaultValue: `Welcome, ${user?.firstName || "Gardener"}` })}
         </h1>
         <p className="text-muted-foreground text-lg mt-2">
-          Today is {format(new Date(), 'EEEE, MMMM do')}
+          {t("dashboard.todayIs", { date: format(new Date(), 'EEEE, MMMM do'), defaultValue: `Today is ${format(new Date(), 'EEEE, MMMM do')}` })}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard 
-          label="Total Plants" 
+          label={t("dashboard.totalPlants")} 
           value={totalPlants} 
-          sub="In your collection"
+          sub={t("dashboard.totalPlantsSub", { defaultValue: "In your collection" })}
           loading={isLoading}
         />
         <StatCard 
-          label="Healthy" 
+          label={t("plants.health.healthy")} 
           value={healthyCount} 
-          sub={`${Math.round((healthyCount / (totalPlants || 1)) * 100)}% of garden`}
+          sub={t("dashboard.healthySub", { percent: Math.round((healthyCount / (totalPlants || 1)) * 100), defaultValue: `${Math.round((healthyCount / (totalPlants || 1)) * 100)}% of garden` })}
           loading={isLoading}
           color="text-green-600"
         />
         <StatCard 
-          label="Needs Care" 
+          label={t("dashboard.needsAttention")} 
           value={needsAttention?.length || 0} 
-          sub="Requires attention"
+          sub={t("dashboard.needsCareSub", { defaultValue: "Requires attention" })}
           loading={isLoading}
           color="text-orange-600"
         />
@@ -55,9 +57,9 @@ export default function Dashboard() {
 
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-display font-bold">Needs Attention</h2>
+          <h2 className="text-2xl font-display font-bold">{t("dashboard.needsAttention")}</h2>
           <Link href="/">
-            <Button variant="link" className="text-primary">View All Garden <ArrowRight className="w-4 h-4 ml-1" /></Button>
+            <Button variant="link" className="text-primary">{t("dashboard.viewAll")} <ArrowRight className="w-4 h-4 ml-1" /></Button>
           </Link>
         </div>
 
@@ -71,8 +73,8 @@ export default function Dashboard() {
             <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
               <SparklesIcon />
             </div>
-            <h3 className="text-lg font-bold text-green-800">All plants are happy!</h3>
-            <p className="text-green-600">Great job keeping up with your garden.</p>
+            <h3 className="text-lg font-bold text-green-800">{t("dashboard.happyPlants", { defaultValue: "All plants are happy!" })}</h3>
+            <p className="text-green-600">{t("dashboard.happyPlantsSub", { defaultValue: "Great job keeping up with your garden." })}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -92,7 +94,7 @@ export default function Dashboard() {
                     <h4 className="font-bold text-foreground">{plant.name}</h4>
                     <div className="flex items-center gap-2 mt-1 text-sm text-orange-600 font-medium">
                       <Droplets className="w-3.5 h-3.5" />
-                      <span>Water Now</span>
+                      <span>{t("dashboard.waterNow", { defaultValue: "Water Now" })}</span>
                     </div>
                   </div>
                   <div className="ml-auto">
