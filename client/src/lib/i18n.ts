@@ -40,7 +40,10 @@ const resources = {
       "plants.noneFound": "No plants found",
       "plants.noneFoundSub": "Start your digital garden by adding your first plant.",
       "chat.welcome": "Hello! I am your AI Plant Advisor. Ask me anything about plant care, diagnosing issues, or local growing tips.",
-      "chat.subtitle": "Your expert botanist in your pocket."
+      "chat.subtitle": "Your expert botanist in your pocket.",
+      "app.tagline": "Track, care for, and grow your personal plant collection with AI-powered insights.",
+      "auth.footer": "Join thousands of happy gardeners.",
+      "auth.login": "Log In with Replit"
     }
   },
   es: {
@@ -80,7 +83,10 @@ const resources = {
       "plants.noneFound": "No se encontraron plantas",
       "plants.noneFoundSub": "Empieza tu jardín digital añadiendo tu primera planta.",
       "chat.welcome": "¡Hola! Soy tu Asesor de Plantas IA. Pregúntame lo que quieras sobre el cuidado de plantas, diagnóstico de problemas o consejos de cultivo local.",
-      "chat.subtitle": "Tu experto botánico en el bolsillo."
+      "chat.subtitle": "Tu experto botánico en el bolsillo.",
+      "app.tagline": "Sigue, cuida y haz crecer tu colección de plantas con consejos de IA.",
+      "auth.footer": "Únete a miles de jardineros felices.",
+      "auth.login": "Iniciar sesión con Replit"
     }
   }
 };

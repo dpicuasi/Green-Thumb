@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Sprout } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
+  const { t } = useTranslation();
   const handleLogin = () => {
     window.location.href = "/api/login";
   };
@@ -19,10 +21,10 @@ export default function Login() {
         
         <div className="space-y-2">
           <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground">
-            Geranium Journal
+            {t("app.name")}
           </h1>
           <p className="text-muted-foreground text-lg">
-            Track, care for, and grow your personal plant collection with AI-powered insights.
+            {t("app.tagline", { defaultValue: "Track, care for, and grow your personal plant collection with AI-powered insights." })}
           </p>
         </div>
 
@@ -31,11 +33,11 @@ export default function Login() {
           size="lg" 
           className="w-full text-lg h-14 rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5"
         >
-          Login with Replit
+          {t("auth.login")}
         </Button>
 
         <div className="text-sm text-muted-foreground pt-8">
-          <p>Join thousands of happy gardeners.</p>
+          <p>{t("auth.footer", { defaultValue: "Join thousands of happy gardeners." })}</p>
         </div>
       </div>
     </div>
