@@ -52,6 +52,21 @@ export function useAuth() {
     },
   });
 
+  const updateProfileMutation = useMutation({
+    mutationFn: async (data: Partial<User>) => {
+      const response = await fetch("/api/user/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error("Failed to update profile");
+      return response.json();
+    },
+    onSuccess: (updatedUser) => {
+      queryClient.setQueryData(["/api/auth/user"], updatedUser);
+    },
+  });
+
   return {
     user,
     isLoading,
@@ -60,5 +75,7 @@ export function useAuth() {
     isLoggingOut: logoutMutation.isPending,
     updateLanguage: updateLanguageMutation.mutate,
     isUpdatingLanguage: updateLanguageMutation.isPending,
+    updateProfile: updateProfileMutation.mutate,
+    isUpdatingProfile: updateProfileMutation.isPending,
   };
 }

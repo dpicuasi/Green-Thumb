@@ -40,6 +40,16 @@ class AuthStorage implements IAuthStorage {
     if (!user) throw new Error("User not found");
     return user;
   }
+
+  async updateUserProfile(id: string, data: Partial<User>): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(users.id, id))
+      .returning();
+    if (!user) throw new Error("User not found");
+    return user;
+  }
 }
 
 export const authStorage = new AuthStorage();
