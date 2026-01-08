@@ -30,4 +30,16 @@ export function registerAuthRoutes(app: Express): void {
       res.status(500).json({ message: "Failed to update language" });
     }
   });
+
+  app.patch("/api/user/profile", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const data = req.body;
+      const updatedUser = await authStorage.updateUserProfile(userId, data);
+      res.json(updatedUser);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      res.status(500).json({ message: "Failed to update profile" });
+    }
+  });
 }

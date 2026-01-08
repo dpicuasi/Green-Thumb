@@ -18,7 +18,8 @@ export function Navigation() {
     { href: "/", label: t("nav.myPlants"), icon: Sprout },
     { href: "/dashboard", label: t("nav.dashboard"), icon: LayoutDashboard },
     { href: "/ai-advisor", label: t("nav.chat"), icon: Sparkles },
-    { href: "/subscription", label: t("nav.subscription"), icon: User },
+    { href: "/profile", label: t("nav.profile", { defaultValue: "Profile" }), icon: User },
+    { href: "/subscription", label: t("nav.subscription"), icon: Calendar },
   ];
 
   const NavContent = () => (

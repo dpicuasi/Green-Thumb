@@ -15,6 +15,8 @@ import PlantDetail from "@/pages/PlantDetail";
 import Subscription from "@/pages/Subscription";
 import AIAdvisor from "@/pages/AIAdvisor";
 
+import Profile from "@/pages/Profile";
+
 function Router() {
   const { user, isLoading } = useAuth();
 
@@ -40,6 +42,7 @@ function Router() {
           <Route path="/plants/:id" component={PlantDetail} />
           <Route path="/subscription" component={Subscription} />
           <Route path="/ai-advisor" component={AIAdvisor} />
+          <Route path="/profile" component={Profile} />
           <Route component={NotFound} />
         </Switch>
       </main>
