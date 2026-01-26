@@ -43,7 +43,8 @@ const resources = {
       "chat.subtitle": "Your expert botanist in your pocket.",
       "app.tagline": "Track, care for, and grow your personal plant collection with AI-powered insights.",
       "auth.footer": "Join thousands of happy gardeners.",
-      "auth.login": "Log In with Replit"
+      "auth.login": "Log In with Replit",
+      "auth.loginWithGoogle": "Continue with Google"
     }
   },
   es: {
@@ -86,7 +87,8 @@ const resources = {
       "chat.subtitle": "Tu experto botánico en el bolsillo.",
       "app.tagline": "Sigue, cuida y haz crecer tu colección de plantas con consejos de IA.",
       "auth.footer": "Únete a miles de jardineros felices.",
-      "auth.login": "Iniciar sesión con Replit"
+      "auth.login": "Iniciar sesión con Replit",
+      "auth.loginWithGoogle": "Continuar con Google"
     }
   }
 };

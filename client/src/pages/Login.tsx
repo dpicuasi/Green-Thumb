@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const { t } = useTranslation();
-  const handleLogin = () => {
-    window.location.href = "/api/login";
+  const handleLogin = (provider: 'replit' | 'google') => {
+    window.location.href = `/api/login?provider=${provider}`;
   };
 
   return (
@@ -28,13 +28,23 @@ export default function Login() {
           </p>
         </div>
 
-        <Button 
-          onClick={handleLogin}
-          size="lg" 
-          className="w-full text-lg h-14 rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5"
-        >
-          {t("auth.login")}
-        </Button>
+        <div className="space-y-4">
+          <Button 
+            onClick={() => handleLogin('replit')}
+            size="lg" 
+            className="w-full text-lg h-14 rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5"
+          >
+            {t("auth.login")}
+          </Button>
+          <Button 
+            onClick={() => handleLogin('google')}
+            size="lg" 
+            variant="outline"
+            className="w-full text-lg h-14 rounded-xl shadow-lg transition-all hover:-translate-y-0.5"
+          >
+            {t("auth.loginWithGoogle")}
+          </Button>
+        </div>
 
         <div className="text-sm text-muted-foreground pt-8">
           <p>{t("auth.footer", { defaultValue: "Join thousands of happy gardeners." })}</p>
